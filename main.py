@@ -13,7 +13,7 @@ def game():
     continue_game = True
     quiz_brain = QuizBrain(question_bank)
 
-    while continue_game:
+    while continue_game == True:
 
         user_answer = quiz_brain.ask_question()
         
@@ -22,17 +22,18 @@ def game():
             quiz_brain.display_correct_answer()
             quiz_brain.display_score()
             print("\n")
-
-            if quiz_brain.still_has_questions() == True:
-                quiz_brain.increment_question()
-            else:
-                print("You got all questions correct!")
-                print("Goodbye.")
-                continue_game = False
         else:
-            print("Sorry that is incorrect.")
-            try_again = input("Would you like to play again (True/False)?: ")
-            if try_again == True:
+            print("You got it Wrong.")
+            quiz_brain.display_correct_answer()
+            quiz_brain.display_score()
+            print("\n")
+
+        if quiz_brain.still_has_questions() == True:
+            quiz_brain.increment_question()
+        else:
+            play_again = input("Would you like to play again (Yes/No)?: ")
+        
+            if play_again == 'Yes':
                 game()
             else:    
                 print("Goodbye.")
