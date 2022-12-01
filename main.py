@@ -15,13 +15,20 @@ def game():
 
     while continue_game:
 
-        question_number = quiz_brain.question_number
-        current_question = quiz_brain.get_question()
-        user_answer = input(f"Q.{question_number}: {current_question.text} (True/False)?: ")
+        user_answer = quiz_brain.ask_question()
         
-        if user_answer == current_question.answer:
-            print("Great job! Here is another one.")
-            quiz_brain.increment_question()
+        if quiz_brain.check_user_answer(user_answer) == True:
+            print("You got it right!")
+            quiz_brain.display_correct_answer()
+            quiz_brain.display_score()
+            print("\n")
+
+            if quiz_brain.still_has_questions() == True:
+                quiz_brain.increment_question()
+            else:
+                print("You got all questions correct!")
+                print("Goodbye.")
+                continue_game = False
         else:
             print("Sorry that is incorrect.")
             try_again = input("Would you like to play again (True/False)?: ")
